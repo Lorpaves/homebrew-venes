@@ -6,7 +6,9 @@ brew install lorpaves/venes/venes
 
 This installs the [Venes CLI](https://github.com/Lorpaves/venes-cli): the Claude Code plugin, its background helper, and the `venes` command. Then pair the Venes app with `venes pair`.
 
-The plugin keeps itself up to date through Claude Code, so `brew upgrade` leaves it alone.
+The plugin keeps itself up to date through Claude Code. `brew upgrade` brings it up to date too, whenever there's a new release.
+
+To release one, tag `vX.Y.Z` in venes-cli, then run `scripts/bump.sh X.Y.Z` here and push.
 
 ```sh
 brew uninstall venes

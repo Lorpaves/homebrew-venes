@@ -1,24 +1,28 @@
 cask "venes" do
-  version :latest
-  sha256 :no_check
+  version "0.3.40"
+  sha256 "0f4009f9203eeb4404386e4376317ed4f1554fba5a75611a9abb49146a1bb0e1"
 
-  url "https://github.com/Lorpaves/venes-cli/archive/refs/heads/main.tar.gz"
+  url "https://github.com/Lorpaves/venes-cli/archive/refs/tags/v#{version}.tar.gz"
   name "Venes CLI"
   desc "Follow and answer Claude Code sessions from the Venes iPhone app"
   homepage "https://github.com/Lorpaves/venes-cli"
 
-  # The plugin keeps itself up to date through Claude Code.
-  auto_updates true
+  livecheck do
+    url :url
+    strategy :git
+  end
+
   depends_on formula: "node"
 
+  # Installs the plugin, or brings it up to date on an upgrade, and starts it.
   installer script: {
-    executable: "venes-cli-main/install.sh",
+    executable: "venes-cli-#{version}/install.sh",
   }
-  binary "venes-cli-main/bin/venes"
+  binary "venes-cli-#{version}/bin/venes"
 
-  # A real uninstall takes everything off; a reinstall or an upgrade only stops the helper.
+  # A real uninstall takes everything off; an upgrade or a reinstall only stops the helper.
   uninstall script: {
-    executable:   "venes-cli-main/scripts/brew-uninstall.sh",
+    executable:   "venes-cli-#{version}/scripts/brew-uninstall.sh",
     must_succeed: false,
   }
 
