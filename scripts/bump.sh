@@ -5,7 +5,11 @@
 set -eu
 version="${1:?usage: scripts/bump.sh VERSION}"
 cd "$(dirname "$0")/.."
-sha=$(curl -fsSL "https://github.com/Lorpaves/venes-cli/archive/refs/tags/v$version.tar.gz" | shasum -a 256 | cut -d ' ' -f 1)
+# Downloaded first, so a failed download stops here rather than giving the checksum of nothing.
+tarball=$(mktemp)
+trap 'rm -f "$tarball"' EXIT
+curl -fsSL --retry 3 -o "$tarball" "https://github.com/Lorpaves/venes-cli/archive/refs/tags/v$version.tar.gz"
+sha=$(shasum -a 256 "$tarball" | cut -d ' ' -f 1)
 sed -i '' -e "s/^  version \".*\"/  version \"$version\"/" -e "s/^  sha256 \".*\"/  sha256 \"$sha\"/" Casks/venes.rb
 git commit -q -am "venes $version"
 echo "venes $version ($sha)"
