@@ -1,6 +1,6 @@
 cask "venes" do
-  version "0.31.0"
-  sha256 "cffbcbd1099a5d8cf1729b953fdbecf44f2867d073232e7e3aeaddc58d77c447"
+  version "0.31.1"
+  sha256 "db57cd303c9890bf140eafff758176a9257b1257a5faff30512656fa0343ad33"
 
   url "https://github.com/Lorpaves/venes-cli/archive/refs/tags/v#{version}.tar.gz"
   name "Venes CLI"
