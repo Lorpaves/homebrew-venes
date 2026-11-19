@@ -5,7 +5,7 @@ cask "venes" do
   url "https://github.com/Lorpaves/venes-cli/archive/refs/tags/v#{version}.tar.gz"
   name "Venes CLI"
   desc "Follow and answer Claude Code sessions from the Venes iPhone app"
-  homepage "https://github.com/Lorpaves/venes-cli"
+  homepage "https://venes.lorpaves.com"
 
   livecheck do
     url :url
